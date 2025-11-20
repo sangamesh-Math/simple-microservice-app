@@ -33,7 +33,6 @@ COPY --from=builder /app/target/*.jar app.jar
 
 EXPOSE 8082
 
-# Use a non-root user (safer for cloud)
 RUN useradd -m spring
 USER spring
 
