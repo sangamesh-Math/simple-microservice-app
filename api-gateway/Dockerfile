@@ -38,5 +38,4 @@ EXPOSE 8080
 RUN useradd -m spring
 USER spring
 
-# Run the app
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
