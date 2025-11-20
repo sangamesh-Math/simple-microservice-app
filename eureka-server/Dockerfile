@@ -7,6 +7,8 @@ WORKDIR /app
 
 # Copy Maven wrapper scripts (if present)
 COPY mvnw .
+RUN chmod +x mvnw
+
 COPY .mvn .mvn
 
 # Copy pom.xml first for dependency caching
