@@ -31,11 +31,6 @@ WORKDIR /app
 # Copy the jar from builder stage
 COPY --from=builder /app/target/*.jar app.jar
 
-# EXPOSE ONLY IF YOUR SERVICE USES THAT PORT
-# api-gateway = 8080
-# eureka-server = 8761
-# employee-service = 8082
-# department-service = 8081
 EXPOSE 8082
 
 # Use a non-root user (safer for cloud)
