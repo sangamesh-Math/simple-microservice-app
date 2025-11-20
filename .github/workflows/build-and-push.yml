@@ -1,0 +1,61 @@
+name: Build & Push Microservices to ACR
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+env:
+  REGISTRY: acrdemosangu.azurecr.io
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # -------------------------
+      # Login to Azure Container Registry
+      # -------------------------
+      - name: Azure CLI Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: ACR Login
+        run: |
+          az acr login --name acrdemosangu
+
+      # -------------------------
+      # Build & Push Microservices
+      # -------------------------
+
+      - name: Build & Push eureka-server
+        run: |
+          docker build -t $REGISTRY/eureka-server:latest ./eureka-server
+          docker push $REGISTRY/eureka-server:latest
+
+      - name: Build & Push api-gateway
+        run: |
+          docker build -t $REGISTRY/api-gateway:latest ./api-gateway
+          docker push $REGISTRY/api-gateway:latest
+
+      - name: Build & Push department-service
+        run: |
+          docker build -t $REGISTRY/department-service:latest ./department-service
+          docker push $REGISTRY/department-service:latest
+
+      - name: Build & Push employee-service
+        run: |
+          docker build -t $REGISTRY/employee-service:latest ./employee-service
+          docker push $REGISTRY/employee-service:latest
+
+      - name: Build & Push demo-service
+        run: |
+          docker build -t $REGISTRY/demo-service:latest ./demo-service
+          docker push $REGISTRY/demo-service:latest
+
