@@ -5,7 +5,7 @@ FROM eclipse-temurin:21-jdk AS builder
 
 WORKDIR /app
 
-# Copy Maven wrapper scripts (if present)
+# Copy Maven wrapper scripts
 COPY mvnw .
 RUN chmod +x mvnw
 
@@ -33,11 +33,6 @@ WORKDIR /app
 # Copy the jar from builder stage
 COPY --from=builder /app/target/*.jar app.jar
 
-# EXPOSE ONLY IF YOUR SERVICE USES THAT PORT
-# api-gateway = 8080
-# eureka-server = 8761
-# employee-service = 8082
-# department-service = 8081
 EXPOSE 8083
 
 # Use a non-root user (safer for cloud)

@@ -10,6 +10,15 @@
         <module name="eureka-server" />
         <module name="employee-service" />
       </profile>
+      <profile name="Annotation profile for demo-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
+        </processorPath>
+        <module name="demo-service" />
+      </profile>
       <profile name="Annotation profile for department-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -22,21 +31,12 @@
         </processorPath>
         <module name="department-service" />
       </profile>
-      <profile name="Annotation profile for demo" enabled="true">
-        <sourceOutputDir name="../demo/target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../demo/target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
-        </processorPath>
-        <module name="demo" />
-      </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
-      <module name="demo" options="-parameters" />
+      <module name="demo-service" options="-parameters" />
       <module name="department-service" options="-parameters" />
       <module name="employee-service" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
